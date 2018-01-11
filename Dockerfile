@@ -1,4 +1,4 @@
-FROM benyoo/alpine:3.4.20160812
+FROM benyoo/alpine:3.5.20170325
 #FROM registry.ds.com/benyoo/alpine:3.4
 
 MAINTAINER from www.dwhd.org by lookback (mondeolove@gmail.com)
@@ -61,6 +61,7 @@ RUN set -x && \
 		--with-http_dav_module \
 		--with-http_degradation_module \
 		--with-http_geoip_module \
+		--with-http_geo_module \
 		--with-http_xslt_module \
 		--with-http_gunzip_module \
 		--with-http_secure_link_module \
@@ -69,8 +70,9 @@ RUN set -x && \
 		--add-module=./ngx_fancyindex \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
-		--add-module=./nginx_upstream_check_module \
-		--add-module=./nginx-stream-upsync-module && \
+		--add-module=./nginx_upstream_check_module  \
+		--add-module=./nginx_limit_speed_module-master && \
+		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
 		#--http-client-body-temp-path=${INSTALL_DIR}/client/ \
 		#--http-proxy-temp-path=${INSTALL_DIR}/proxy/ \
@@ -85,7 +87,13 @@ RUN set -x && \
 	apk add --no-cache --virtual .ngx-rundeps $runDeps && \
 	apk del .build-deps && \
 	#apk del build-base git patch && \
-	rm -rf /var/cache/apk/* /tmp/* ${INSTALL_DIR}/conf/nginx.conf
+	rm -rf /var/cache/apk/* /tmp/* ${INSTALL_DIR}/conf/nginx.conf && \
+	mkdir -p /usr/local/geoip && \
+	curl -Lk http://www.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz > /usr/local/geoip/GeoIP.dat.gz && \
+	curl -Lk http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz > /usr/local/geoip/GeoLiteCity.dat.gz && \
+	cd /usr/local/geoip && \
+	gunzip GeoIP.dat.gz && \
+	gunzip GeoLiteCity.dat.gz
 
 ENV PATH=${INSTALL_DIR}/sbin:$PATH \
 	TERM=linux
