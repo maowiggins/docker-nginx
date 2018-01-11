@@ -1,7 +1,7 @@
 FROM benyoo/alpine:3.5.20170325
 #FROM registry.ds.com/benyoo/alpine:3.4
 
-MAINTAINER from www.dwhd.org by lookback (mondeolove@gmail.com)
+MAINTAINER wiggins
 
 ARG VERSION=${VERSION:-1.10.3}
 #ARG SHA256=${SHA256:-1045ac4987a396e2fa5d0011daf8987b612dd2f05181b67507da68cbe7d765c2}
