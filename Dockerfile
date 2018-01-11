@@ -61,7 +61,7 @@ RUN set -x && \
 		--with-http_dav_module \
 		--with-http_degradation_module \
 		--with-http_geoip_module \
-		--with-http_geo_module \
+		#--with-http_geo_module \
 		--with-http_xslt_module \
 		--with-http_gunzip_module \
 		--with-http_secure_link_module \
@@ -70,8 +70,8 @@ RUN set -x && \
 		--add-module=./ngx_fancyindex \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
-		--add-module=./nginx_upstream_check_module  \
-		--add-module=./nginx_limit_speed_module-master && \
+		--add-module=./nginx_upstream_check_module && \
+		#--add-module=./nginx_limit_speed_module-master && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
 		#--http-client-body-temp-path=${INSTALL_DIR}/client/ \
