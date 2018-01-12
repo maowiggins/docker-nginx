@@ -1,5 +1,5 @@
 # docker-nginx
-
+**本容器集成了GEOIP模块，可以实现基于地区进行页面等限制**
 ## 快速启动
 
 1、docker run启动
