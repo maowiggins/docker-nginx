@@ -1,11 +1,4 @@
 #!/bin/bash
-#########################################################################
-# File Name: entrypoint.sh
-# Author: LookBack
-# Email: admin#dwhd.org
-# Version:
-# Created Time: 2016年08月12日 星期五 16时43分50秒
-#########################################################################
 
 set -e
 [[ $DEBUG == true ]] && set -x
@@ -60,6 +53,7 @@ if [[ "${DEFAULT_CONF}" =~ ^[eE][nN][aA][bB][lL][eE]$ ]]; then
     fi
 fi
 
+#论坛博客相关参数
 if [ -n "$REWRITE" ]; then
 	[ ! -d ${INSTALL_DIR}/conf/rewrite ] && mkdir -p ${INSTALL_DIR}/conf/rewrite
 	if [ "$REWRITE" = "wordpress" ]; then
