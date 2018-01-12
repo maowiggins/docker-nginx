@@ -68,7 +68,7 @@ RUN set -x && \
 		--add-module=./ngx_fancyindex \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
-		--add-module=./nginx_upstream_check_module && \
+		--add-module=./nginx_upstream_check_module \
 		--add-module=./nginx_limit_speed_module && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
