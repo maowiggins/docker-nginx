@@ -1,34 +1,40 @@
 version: '2'
-
 services:
-	php:
-		build:
-			context: https://github.com/xiaoyawl/docker-php.git
-		restart: always
-		privileged: true
-		image: benyoo/php:latest
-		volumes:
-		- /etc/localtime:/etc/localtime:ro
-		- /data/wwwroot:/data/wwwroot:rw
-	nginx:
-		build:
-			context: https://github.com/xiaoyawl/docker-nginx.git
-		restart: always
-		privileged: true
-		image: benyoo/nginx:latest
-		ports:
-		- "80:80"
-		- "443:443"
-		links:
-		- php:php
-		volumes_from:
-		- php
-		environment:
-		- PHP_FPM=Yes
-		- PHP_FPM_SERVER=php
-		- PHP_FPM_PORT=9000
-		volumes:
-		- /etc/localtime:/etc/localtime:ro
-		- /data/wwwroot:/data/wwwroot:rw
-		- /data/logs/wwwlogs:/data/wwwlogs:rw
-		- /data/conf/nginx/vhost:/usr/local/nginx/conf/vhost:rw
+  php:
+    container_name: php_server
+    restart: always
+    privileged: true
+    image: wiggins/php:latest
+    network_mode: host
+    environment:
+    - TERM=linux
+    - OPCACHE=disable
+    - REDIS=enable
+    - SWOOLE=enable
+    - MEMCACHE=enable
+    - MAX_EXECUTION_TIME=10
+    - MEM_LIMIT=256
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /data/wwwroot:/data/wwwroot:rw
+    - /usr/local/php/etc:/usr/local/php/etc:rw
+
+  nginx:
+    container_name: nginx_server
+    restart: always
+    privileged: true
+    image: wiggins/nginx:latest
+    network_mode: host
+    volumes_from:
+    - php
+    environment:
+    - TERM=linux
+    - PHP_FPM=Yes
+    - PHP_FPM_SERVER=127.0.0.1
+    - PHP_FPM_PORT=9000
+    - DEFAULT_CONF=disable
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /data/wwwroot:/data/wwwroot:rw
+    - /data/wwwlogs:/data/wwwlogs:rw
+    - /usr/local/nginx/conf:/usr/local/nginx/conf:rw
