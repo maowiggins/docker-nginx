@@ -22,6 +22,12 @@ RUN set -x && \
 	git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git && \
 	git clone https://github.com/xiaokai-wang/nginx-stream-upsync-module.git && \
 	git clone https://github.com/yaoweibin/nginx_limit_speed_module.git && \
+	mkdir ngx_http_geo_module && \
+	wget -O ngx_http_geo_module/ngx_http_geo_module.c https://raw.githubusercontent.com/nginx/nginx/master/src/http/modules/ngx_http_geo_module.c && \
+	mkdir ngx_http_limit_req_module && \
+	wget -O ngx_http_limit_req_module/ngx_http_limit_req_module.c https://raw.githubusercontent.com/nginx/nginx/master/src/http/modules/ngx_http_limit_req_module.c && \
+	mkdir ngx_http_limit_conn_module && \
+	wget -O ngx_http_limit_conn_module/ngx_http_limit_conn_module.c https://raw.githubusercontent.com/nginx/nginx/master/src/http/modules/ngx_http_limit_conn_module.c && \
 	#git clone https://github.com/leev/ngx_http_geoip2_module.git && \
 	addgroup -g 400 -S www && \
 	adduser -u 400 -S -h ${DATA_DIR} -s /sbin/nologin -g 'WEB Server' -G www www && \
@@ -69,6 +75,9 @@ RUN set -x && \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
 		--add-module=./nginx_upstream_check_module \
+		--add-module=./ngx_http_geo_module \
+		--add-module=./ngx_http_limit_req_module \
+		--add-module=./ngx_http_limit_conn_module \
 		--add-module=./nginx_limit_speed_module && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
