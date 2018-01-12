@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nginx:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+    container_name: nginx_server
+    restart: always
+    privileged: true
+    image: wiggins/nginx:latest
+    network_mode: host
+    environment:
+    - TERM=linux
+    - DEFAULT_CONF=disable
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /data/wwwroot:/data/wwwroot:rw
+    - /data/wwwlogs:/data/wwwlogs:rw
+    - /usr/local/nginx/conf:/usr/local/nginx/conf:rw
