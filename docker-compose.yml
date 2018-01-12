@@ -1,14 +1,16 @@
 version: '2'
-
 services:
   nginx:
-    build:
-      context: https://github.com/xiaoyawl/docker-nginx.git
+    container_name: nginx_server
     restart: always
-    image: nginx:1.10.1
-    container_name: nginx
-    ports:
-    - "80:80"
+    privileged: true
+    image: wiggins/nginx:latest
+    network_mode: host
+    environment:
+    - TERM=linux
+    - DEFAULT_CONF=disable
     volumes:
-    - /data/wwwroot:/data/wwwroot
-    - /etc/localtime:/etc/localtime
+    - /etc/localtime:/etc/localtime:ro
+    - /data/wwwroot:/data/wwwroot:rw
+    - /data/wwwlogs:/data/wwwlogs:rw
+    - /usr/local/nginx/conf:/usr/local/nginx/conf:rw
