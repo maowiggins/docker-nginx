@@ -63,8 +63,6 @@ RUN set -x && \
 		--with-http_degradation_module \
 		--with-http_geoip_module \
 		#--with-http_geo_module \
-		--with-http_limit_req_module \
-		--with-http_limit_conn_module \
 		--with-http_xslt_module \
 		--with-http_gunzip_module \
 		--with-http_secure_link_module \
@@ -74,9 +72,6 @@ RUN set -x && \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
 		--add-module=./nginx_upstream_check_module \
-		#--add-module=./ngx_http_geo_module \
-		#--add-module=./ngx_http_limit_req_module \
-		#--add-module=./ngx_http_limit_conn_module \
 		--add-module=./nginx_limit_speed_module && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
