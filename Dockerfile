@@ -64,7 +64,7 @@ RUN set -x && \
 		--with-http_geoip_module \
 		#--with-http_geo_module \
 		--with-http_limit_req_module \
-		--with-http_limit_conn_module
+		--with-http_limit_conn_module \
 		--with-http_xslt_module \
 		--with-http_gunzip_module \
 		--with-http_secure_link_module \
