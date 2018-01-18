@@ -10,7 +10,7 @@
 set -e
 [[ $DEBUG == true ]] && set -x
 DEFAULT_CONF=${DEFAULT_CONF:-enable}
-LOG_DATADIR=${LOG_DATADIR:-/data/wwwlog}
+LOG_DATADIR=${LOG_DATADIR:-/data/wwwlogs}
 if [ -n "$TIMEZONE" ]; then
 	rm -rf /etc/localtime && \
 	ln -s /usr/share/zoneinfo/$TIMEZONE /etc/localtime
