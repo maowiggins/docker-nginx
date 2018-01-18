@@ -3,6 +3,7 @@
 set -e
 [[ $DEBUG == true ]] && set -x
 DEFAULT_CONF=${DEFAULT_CONF:-enable}
+LOG_DATADIR=${LOG_DATADIR:-/data/wwwlogs}
 
 if [ -n "$TIMEZONE" ]; then
 	rm -rf /etc/localtime && \
@@ -18,7 +19,7 @@ mkdir -p ${DATA_DIR}
 
 if [ -d /etc/logrotate.d ]; then
 	cat > /etc/logrotate.d/nginx <<-EOF
-		$(dirname ${DATA_DIR})/wwwlogs/*.log {
+		${LOG_DATADIR}/*.log {
 			daily
 			rotate 5
 			missingok
