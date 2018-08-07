@@ -70,8 +70,7 @@ RUN set -x && \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
 		--add-module=./nginx_upstream_check_module \
-		#--add-module=./nginx_limit_speed_module && \
-		--with-compat \
+		#--add-module=./nginx_limit_speed_module  \
 		--add-dynamic-module=./nginx-ipip-module && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
