@@ -22,6 +22,7 @@ RUN set -x && \
 	git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git && \
 	git clone https://github.com/xiaokai-wang/nginx-stream-upsync-module.git && \
 	git clone https://github.com/yaoweibin/nginx_limit_speed_module.git && \
+	git clone https://github.com/ipipdotnet/nginx-ipip-module && \
 	#git clone https://github.com/leev/ngx_http_geoip2_module.git && \
 	addgroup -g 400 -S www && \
 	adduser -u 400 -S -h ${DATA_DIR} -s /sbin/nologin -g 'WEB Server' -G www www && \
@@ -69,7 +70,9 @@ RUN set -x && \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
 		--add-module=./nginx_upstream_check_module \
-		--add-module=./nginx_limit_speed_module && \
+		#--add-module=./nginx_limit_speed_module && \
+		--with-compat \
+		--add-dynamic-module=./nginx-ipip-module && \
 		#--add-module=./nginx-stream-upsync-module && \
 		#--add-module=./ngx_http_geoip2_module && \
 		#--http-client-body-temp-path=${INSTALL_DIR}/client/ \
