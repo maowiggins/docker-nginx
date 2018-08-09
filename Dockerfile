@@ -60,7 +60,7 @@ RUN set -x && \
 		--with-http_slice_module \
 		--add-module=./ngx_http_substitutions_filter_module \
 		--add-module=./ngx_fancyindex \
-		--add-module=./echo_nginx_module \
+		#--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
 		#--add-module=./nginx_upstream_check_module  \
 		--add-dynamic-module=./nginx-ipip-module && \
