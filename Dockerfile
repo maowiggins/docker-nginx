@@ -62,7 +62,7 @@ RUN set -x && \
 		--add-module=./ngx_fancyindex \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
-		--add-module=./nginx_upstream_check_module  \
+		#--add-module=./nginx_upstream_check_module  \
 		--add-dynamic-module=./nginx-ipip-module && \
 	make -j$(getconf _NPROCESSORS_ONLN) && \
 	make install && \
