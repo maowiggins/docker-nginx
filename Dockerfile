@@ -20,7 +20,6 @@ RUN set -x && \
 		build-base linux-headers libxslt-dev gd-dev openssl-dev libstdc++ libgcc patch git tar curl && \
 	curl -Lk ${DOWN_URL} | tar xz -C ${TEMP_DIR} --strip-components=1 && \
 	curl -Lk https://github.com/maowiggins/nginx-add-module/raw/master/nginx-mode.tar.gz|tar xz -C ${TEMP_DIR} && \
-	git clone https://github.com/arut/nginx-rtmp-module.git -b v1.1.7 && \
 	git clone https://github.com/ipipdotnet/nginx-ipip-module.git && \
 	addgroup -g 400 -S www && \
 	adduser -u 400 -S -h ${DATA_DIR} -s /sbin/nologin -g 'WEB Server' -G www www && \
@@ -59,9 +58,7 @@ RUN set -x && \
 		--with-http_secure_link_module \
 		--with-http_slice_module \
 		--add-module=./ngx_http_substitutions_filter_module \
-		--add-module=./ngx_fancyindex \
-		#--add-module=./echo_nginx_module \
-		--add-module=./nginx-rtmp-module \
+		#--add-module=./ngx_fancyindex \
 		#--add-module=./nginx_upstream_check_module  \
 		--add-dynamic-module=./nginx-ipip-module && \
 	make -j$(getconf _NPROCESSORS_ONLN) && \
