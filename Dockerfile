@@ -23,14 +23,10 @@ RUN set -x && \
 	git clone https://github.com/arut/nginx-rtmp-module.git -b v1.1.7 && \
 	git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git && \
 	git clone https://github.com/xiaokai-wang/nginx-stream-upsync-module.git && \
-	#git clone https://github.com/leev/ngx_http_geoip2_module.git && \
+	git clone https://github.com/ipipdotnet/nginx-ipip-module.git && \
 	addgroup -g 400 -S www && \
 	adduser -u 400 -S -h ${DATA_DIR} -s /sbin/nologin -g 'WEB Server' -G www www && \
 	find ${TEMP_DIR} -type f -exec sed -i 's/\r$//g' {} \; && \
-	#cd ${FILE_NAME%%\.tar*} && \
-	sed -ri "s/^(#define NGX_HTTP_AUTOINDEX_NAME_LEN).*/\1  ${AUTOINDEX_NAME_LEN}/" src/http/modules/ngx_http_autoindex_module.c && \
-	sed -ri "s/^(#define NGX_HTTP_AUTOINDEX_PREALLOCATE).*/\1  ${AUTOINDEX_NAME_LEN}/" src/http/modules/ngx_http_autoindex_module.c && \
-	patch -p0 < ./nginx_upstream_check_module/check_1.9.2+.patch && \
 	CFLAGS=-Wno-unused-but-set-variable ./configure --prefix=${INSTALL_DIR} \
 		--user=www --group=www \
 		--error-log-path=/data/wwwlogs/error.log \
@@ -60,7 +56,6 @@ RUN set -x && \
 		--with-http_dav_module \
 		--with-http_degradation_module \
 		--with-http_geoip_module \
-		#--with-http_geo_module \
 		--with-http_xslt_module \
 		--with-http_gunzip_module \
 		--with-http_secure_link_module \
@@ -69,15 +64,8 @@ RUN set -x && \
 		--add-module=./ngx_fancyindex \
 		--add-module=./echo_nginx_module \
 		--add-module=./nginx-rtmp-module \
-		--add-module=./nginx_upstream_check_module && \
-		#--add-module=./nginx_limit_speed_module-master && \
-		#--add-module=./nginx-stream-upsync-module && \
-		#--add-module=./ngx_http_geoip2_module && \
-		#--http-client-body-temp-path=${INSTALL_DIR}/client/ \
-		#--http-proxy-temp-path=${INSTALL_DIR}/proxy/ \
-		#--http-fastcgi-temp-path=${INSTALL_DIR}/fcgi/ \
-		#--http-uwsgi-temp-path=${INSTALL_DIR}/uwsgi \
-		#--http-scgi-temp-path=${INSTALL_DIR}/scgi \
+		--add-module=./nginx_upstream_check_module  \
+		--add-dynamic-module=./nginx-ipip-module && \
 	make -j$(getconf _NPROCESSORS_ONLN) && \
 	make install && \
 	curl -Lks https://raw.githubusercontent.com/xiaoyawl/docker-nginx/master/Block_Injections.conf > ${INSTALL_DIR}/conf/Block_Injections.conf && \
