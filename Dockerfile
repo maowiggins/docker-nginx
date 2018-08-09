@@ -21,8 +21,6 @@ RUN set -x && \
 	curl -Lk ${DOWN_URL} | tar xz -C ${TEMP_DIR} --strip-components=1 && \
 	curl -Lk https://github.com/maowiggins/nginx-add-module/raw/master/nginx-mode.tar.gz|tar xz -C ${TEMP_DIR} && \
 	git clone https://github.com/arut/nginx-rtmp-module.git -b v1.1.7 && \
-	git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git && \
-	git clone https://github.com/xiaokai-wang/nginx-stream-upsync-module.git && \
 	git clone https://github.com/ipipdotnet/nginx-ipip-module.git && \
 	addgroup -g 400 -S www && \
 	adduser -u 400 -S -h ${DATA_DIR} -s /sbin/nologin -g 'WEB Server' -G www www && \
