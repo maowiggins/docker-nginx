@@ -7,7 +7,7 @@
 **强烈建议添加 `--privileged` 参数来启用，因为本容器在启动时会有几个内核参数的修改的动作。**
 
 ```bash
-$ docker run -d --name redis --privileged -p 6379:6379 wiggins/nginx:latest
+$ docker run -d --name nginx --privileged -p 80:80 wiggins/nginx:latest
 ```
 
 2、通过docker-compose来实现快速启动
